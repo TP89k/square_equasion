@@ -3,10 +3,11 @@
 
 #include "equation_data.h"
 #include "equation_tests.h"
-
+  
 
 
 int main() {
+    
     Equation_data equation_data;
 
     testing_program();

@@ -65,7 +65,7 @@ int run_test()
 void testing_program()
 {
     int count_tests = run_test();
-
+  
     printf("ПРОЙДЕНО ТЕСТОВ: %d", count_tests);
     printf(" ИЗ %d\n", AMOUNT_OF_TESTS);
 } 

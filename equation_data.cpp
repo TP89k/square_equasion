@@ -7,14 +7,14 @@
 //const int AMOUNT_OF_TESTS - размер массива тестовых примеров
 //----------------------------------------
 
-const int AMOUNT_OF_TESTS = 6;
+// const int AMOUNT_OF_TESTS = 6;
 
 
 //----------------------------------------
 //const float EPSILON - константа эпсилон окрестности вычислений
 //----------------------------------------
 
-const float EPSILON = 0.00001;
+// const float EPSILON = 0.00001;
 
 
 
@@ -29,13 +29,14 @@ int check_epsilon_neighborhood(double number, double program_number)
     if (!((number < program_number + EPSILON) && (number > program_number - EPSILON)))
     {
         return 1;
-    }
+    }  
     else
     {
         return 0;
     }
 }
 
+//./main.exe
 
 //----------------------------------------
 //@param [in] Equation_data - структура коэффицентов и корней уравнения + количество корней
