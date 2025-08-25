@@ -7,7 +7,7 @@
 
 
 int main() {
-    
+
     Equation_data equation_data;
 
     testing_program();
@@ -15,7 +15,7 @@ int main() {
     equation_data = input();
 
     equation_data = solve_quadratic_equation(equation_data);
-    print_results(equation_data);
+    print_results(&equation_data);
     
     return 0;
 }
