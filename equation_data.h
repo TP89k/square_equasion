@@ -54,9 +54,9 @@ typedef struct
 
 
 int check_epsilon_neighborhood(double number, double program_number);
-void print_equation(Equation_data equation_data);
-Equation_data input();
-double calc_discriminant(Equation_data equation_data);
+void print_equation(Equation_data *equation_data);
+Equation_data input(Equation_data *equation_data);
+double calc_discriminant(Equation_data *equation_data);
 Equation_data solve_quadratic_equation(Equation_data equation_data);
 void print_results(Equation_data *equation_data);
 

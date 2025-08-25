@@ -11,3 +11,10 @@
 
 # all files with .save expansion
 *.save
+
+# all files with .layout.cbTemp expansion
+*.layout.cbTemp
+
+# all files with .exe expansion
+*.exe
+

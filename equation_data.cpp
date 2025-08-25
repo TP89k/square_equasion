@@ -28,22 +28,22 @@ int check_epsilon_neighborhood(double number, double program_number)
 //[out] вывод вида уравнения на экран пользователя
 //----------------------------------------
 
-void print_equation(Equation_data equation_data)
+void print_equation(Equation_data *equation_data)
 {
-    printf("Уравнение: %.4fx^2", equation_data.coeffs.a);
-    if (equation_data.coeffs.b >= 0) {
-        printf(" + %.4fx", equation_data.coeffs.b);
+    printf("Уравнение: %.4fx^2", (*equation_data).coeffs.a);
+    if ((*equation_data).coeffs.b >= 0) {
+        printf(" + %.4fx", (*equation_data).coeffs.b);
     }
     else
     {
-        printf(" - %.4fx", -(equation_data.coeffs.b));
+        printf(" - %.4fx", -((*equation_data).coeffs.b));
     }
 
-    if (equation_data.coeffs.c >= 0) {
-        printf(" + %.4f = 0\n", equation_data.coeffs.c);
+    if ((*equation_data).coeffs.c >= 0) {
+        printf(" + %.4f = 0\n", (*equation_data).coeffs.c);
     }
     else {
-        printf(" - %.4f = 0\n", -(equation_data.coeffs.c));
+        printf(" - %.4f = 0\n", -((*equation_data).coeffs.c));
     }
 }
 
@@ -52,9 +52,9 @@ void print_equation(Equation_data equation_data)
 //@param [out] Equation_data - структура коэффицентов и корней уравнения + количество корней
 //----------------------------------------
 
-Equation_data input()
+Equation_data input(Equation_data *equation_data)
  {
-    Equation_data equation_data;
+
     double a = NAN;
     double b = NAN;
     double c = NAN;
@@ -66,16 +66,16 @@ Equation_data input()
     scanf("%lf", &b);
     scanf("%lf", &c);
 
-    equation_data.coeffs.a = a;
-    equation_data.coeffs.b = b;
-    equation_data.coeffs.c = c;
+    (*equation_data).coeffs.a = a;
+    (*equation_data).coeffs.b = b;
+    (*equation_data).coeffs.c = c;
 
     printf("\nВы ввели:\n");
-    printf("Первый коэфицент a: %.4f\n", equation_data.coeffs.a);
-    printf("Второй коэфицент b: %.4f\n", equation_data.coeffs.b);
-    printf("Третий коэфицент c: %.4f\n", equation_data.coeffs.c);
+    printf("Первый коэфицент a: %.4f\n", (*equation_data).coeffs.a);
+    printf("Второй коэфицент b: %.4f\n", (*equation_data).coeffs.b);
+    printf("Третий коэфицент c: %.4f\n", (*equation_data).coeffs.c);
 
-    return equation_data;
+    return *equation_data;
  }
 
 
@@ -84,9 +84,9 @@ Equation_data input()
 //@param [out] discriminant вывод дискриминанта уравнения
 //----------------------------------------
 
-double calc_discriminant(Equation_data equation_data)
+double calc_discriminant(Equation_data *equation_data)
 {
-    return equation_data.coeffs.b * equation_data.coeffs.b - 4 * equation_data.coeffs.a * equation_data.coeffs.c;
+    return (*equation_data).coeffs.b * (*equation_data).coeffs.b - 4 * (*equation_data).coeffs.a * (*equation_data).coeffs.c;
 }
 
 
@@ -97,7 +97,7 @@ double calc_discriminant(Equation_data equation_data)
 
 Equation_data solve_quadratic_equation(Equation_data equation_data)
 {
-    double discriminant = calc_discriminant(equation_data);
+    double discriminant = calc_discriminant(&equation_data);
 
     if (check_epsilon_neighborhood(equation_data.coeffs.a, 0)==1)
     {
