@@ -42,13 +42,13 @@ typedef struct
 
 //----------------------------------------
 // struct Equation_data - структура коэффицентов и корней уравнения
-// coeffs - коэффициенты уравнения
+// coefficents - коэффициенты уравнения
 // roots - корни уравнения и их количество
 //----------------------------------------
 
 typedef struct
 {
-    Coefficients coeffs;
+    Coefficients coefficents;
     Roots roots;
 } Equation_data;
 

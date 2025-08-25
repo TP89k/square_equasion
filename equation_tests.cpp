@@ -17,9 +17,9 @@ int run_one_test(double a, double b, double c, double x1_specified, double x2_sp
 {
     Equation_data equation_data;
 
-    equation_data.coeffs.a = a;
-    equation_data.coeffs.b = b;
-    equation_data.coeffs.c = c;
+    equation_data.coefficents.a = a;
+    equation_data.coefficents.b = b;
+    equation_data.coefficents.c = c;
 
     equation_data = solve_quadratic_equation(equation_data);
 
