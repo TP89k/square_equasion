@@ -2,11 +2,28 @@
 #include <stdio.h>
 #include <math.h>
 
-// Определение констант
+
+//----------------------------------------
+//const int AMOUNT_OF_TESTS - размер массива тестовых примеров
+//----------------------------------------
+
 const int AMOUNT_OF_TESTS = 6;
+
+
+//----------------------------------------
+//const float EPSILON - константа эпсилон окрестности вычислений
+//----------------------------------------
+
 const float EPSILON = 0.00001;
 
-// Реализации функций
+
+
+//----------------------------------------
+//@param [in] double number число, для которого проверяется эпсилон окрестность
+//@param [in] double program_number число, вокруг которого проверяется эпсилон окрестность
+//[out] int число (1 - если True и 0 - если False)
+//----------------------------------------
+
 int check_epsilon_neighborhood(double number, double program_number)
 {
     if (!((number < program_number + EPSILON) && (number > program_number - EPSILON)))
@@ -18,6 +35,12 @@ int check_epsilon_neighborhood(double number, double program_number)
         return 0;
     }
 }
+
+
+//----------------------------------------
+//@param [in] Equation_data - структура коэффицентов и корней уравнения + количество корней
+//[out] вывод вида уравнения на экран пользователя
+//----------------------------------------
 
 void print_equation(Equation_data equation_data)
 {
@@ -37,6 +60,11 @@ void print_equation(Equation_data equation_data)
         printf(" - %.4f = 0\n", -(equation_data.c));
     }
 }
+
+
+//----------------------------------------
+//@param [out] Equation_data - структура коэффицентов и корней уравнения + количество корней
+//----------------------------------------
 
 Equation_data input()
 {
@@ -64,10 +92,22 @@ Equation_data input()
     return equation_data;
 }
 
+
+//----------------------------------------
+//@param [in] Equation_data - структура коэффицентов и корней уравнения + количество корней
+//@param [out] discriminant вывод дискриминанта уравнения
+//----------------------------------------
+
 double calc_discriminant(Equation_data equation_data)
 {
     return equation_data.b * equation_data.b - 4 * equation_data.a * equation_data.c;
 }
+
+
+//----------------------------------------
+//@param [in] Equation_data - структура коэффицентов и корней уравнения + количество корней
+//@param [out] Equation_data - структура коэффицентов и корней уравнения + количество корней
+//----------------------------------------
 
 Equation_data solve_quadratic_equation(Equation_data equation_data)
 {
@@ -110,6 +150,13 @@ Equation_data solve_quadratic_equation(Equation_data equation_data)
 
     return equation_data;
 }
+
+
+//----------------------------------------
+//@param [in]  Equation_data - структура коэффицентов и корней уравнения + количество корней
+//@param [in]  x1 первый корень уравнения
+//@param [in]  x2 второй корень уравнения
+//----------------------------------------
 
 void print_results(Equation_data equation_data)
 {

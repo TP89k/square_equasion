@@ -1,6 +1,17 @@
 #include "equation_tests.h"
 #include <stdio.h>
 
+
+//----------------------------------------
+//@param [in] double a  коэффицент а
+//@param [in] double b  коэффицент b
+//@param [in] double c  коэффицент c
+//@param [in] double x1_specified  тестовый корень 1
+//@param [in] double x2_specified  тестовый корень 2
+//@param [in] int number_of_solutions  количество тестовых корней
+//@param [out] 1, если тестовые корни совпадают с настоящим, иначе 0
+//----------------------------------------
+
 int run_one_test(double a, double b, double c, double x1_specified, double x2_specified, int number_of_solutions)
 {
     Equation_data equation_data;
@@ -21,6 +32,11 @@ int run_one_test(double a, double b, double c, double x1_specified, double x2_sp
     }
 }
 
+
+//----------------------------------------
+//@param [out] int not_failed количество верно пройденных тестов
+//----------------------------------------
+
 int run_test()
 {
     Equation_data tests[AMOUNT_OF_TESTS] = {
@@ -40,6 +56,11 @@ int run_test()
 
     return not_failed;
 }
+
+
+//----------------------------------------
+//[out] количество верно пройденных тестов
+//----------------------------------------
 
 void testing_program()
 {
