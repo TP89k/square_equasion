@@ -8,3 +8,6 @@
 /square_equasion.layout
 /square_equasion_build_log.html
 /testing_system.h.save
+
+# all files with .save expansion
+*.save

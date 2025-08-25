@@ -3,58 +3,8 @@
 
 #include "equation_data.h"
 
-// Прототипы тестовых функций
 int run_one_test(double a, double b, double c, double x1_specified, double x2_specified, int number_of_solutions);
 int run_test();
 void testing_program();
-
-// Реализации тестовых функций
-int run_one_test(double a, double b, double c, double x1_specified, double x2_specified, int number_of_solutions)
-{
-    Equation_data equation_data;
-
-    equation_data.a = a;
-    equation_data.b = b;
-    equation_data.c = c;
-
-    equation_data = solve_quadratic_equation(equation_data);
-
-    if ((check_epsilon_neighborhood(equation_data.x1, x1_specified) == 0) &&
-        (check_epsilon_neighborhood(equation_data.x2, x2_specified) == 0) &&
-        (number_of_solutions == equation_data.num_roots)) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-}
-
-int run_test()
-{
-    Equation_data tests[AMOUNT_OF_TESTS] = {
-        {3, 5, -2, 0.3333333, -2, 2},
-        {-2, 8, 6, -0.645751, 4.64575, 2},
-        {4, -4, 1, 0.5, 0.5, 1},
-        {7, 2, 9, 0, 0, 0},
-        {0, 0, 0, 0, 0, -1},
-        {2, -3, 1, 1, 0.5, 2}
-    };
-
-    int not_failed = 0;
-    for (int i = 0; i < AMOUNT_OF_TESTS; i++)
-    {
-        not_failed += run_one_test(tests[i].a, tests[i].b, tests[i].c, tests[i].x1, tests[i].x2, tests[i].num_roots);
-    }
-
-    return not_failed;
-}
-
-void testing_program()
-{
-    int count_tests = run_test();
-
-    printf("ПРОЙДЕНО ТЕСТОВ: %d", count_tests);
-    printf(" ИЗ %d\n", AMOUNT_OF_TESTS);
-}
 
 #endif

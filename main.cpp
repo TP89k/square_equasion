@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <math.h>
-#include <TXLib.h>
 
 #include "equation_data.h"
 #include "equation_tests.h"
+
+
 
 int main() {
     Equation_data equation_data;
@@ -14,6 +15,6 @@ int main() {
 
     equation_data = solve_quadratic_equation(equation_data);
     print_results(equation_data);
-
+    
     return 0;
 }
