@@ -52,9 +52,11 @@ int run_one_test(double *a, double *b, double *c, double *x1_specified, double *
 
     equation_data = solve_quadratic_equation(equation_data);
 
-    if ((check_epsilon_neighborhood(equation_data.roots.x1, *x1_specified)==0) &&
+    if ( ((check_epsilon_neighborhood(equation_data.roots.x1, *x1_specified)==0) &&
         (check_epsilon_neighborhood(equation_data.roots.x2, *x2_specified)==0) &&
-        (*number_of_solutions == equation_data.roots.num_roots)) {
+        (*number_of_solutions == equation_data.roots.num_roots)) || ((check_epsilon_neighborhood(equation_data.roots.x2, *x1_specified)==0) &&
+        (check_epsilon_neighborhood(equation_data.roots.x1, *x2_specified)==0) &&
+        (*number_of_solutions == equation_data.roots.num_roots)) ) {
         return 1;
     }
     else {

@@ -1,17 +1,28 @@
 #ifndef EQUATION_DATA_H
 #define EQUATION_DATA_H
 
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define MAGENTA "\033[35m"
+#define BOLD    "\033[1m"
+
 #include "equation_tests.h"
 #include <stdio.h>
 #include <math.h>
 
+
+//----------------------------------------
+//const int LANGUAGE - константа языка текста в консоли (0 - русский, 1 - English)
+//----------------------------------------
+
+const int LANGUAGE = 0;
   
 //----------------------------------------
 //const float EPSILON - константа эпсилон окрестности вычислений
 //----------------------------------------
 
 const float EPSILON = 0.00001;
-
+ 
 
 //----------------------------------------
 // Подструктура для коэффициентов

@@ -58,18 +58,18 @@ Equation_data input(Equation_data *equation_data)
     double b = NAN;
     double c = NAN;
 
-    printf("==== РЕШЕНИЕ КВАДРАТНЫХ УРАВНЕНИЙ ====\n");
-    printf("Введите три коэффицента a,b,c (каждое число с новой строки):\n");
+    printf(BOLD "==== РЕШЕНИЕ КВАДРАТНЫХ УРАВНЕНИЙ ====\n" RESET);
+    printf(BOLD "Введите три коэффицента a,b,c (каждое число с новой строки):\n" RESET);
 
     scanf("%lf", &a);
     scanf("%lf", &b);
     scanf("%lf", &c);
-
+  
     (*equation_data).coefficents.a = a;
     (*equation_data).coefficents.b = b;
     (*equation_data).coefficents.c = c;
 
-    printf("\nВы ввели:\n");
+    printf(BOLD "\nВы ввели:\n");
     printf("Первый коэфицент a: %.6f\n", (*equation_data).coefficents.a);
     printf("Второй коэфицент b: %.6f\n", (*equation_data).coefficents.b);
     printf("Третий коэфицент c: %.6f\n", (*equation_data).coefficents.c);
@@ -149,17 +149,17 @@ void print_results(Equation_data *equation_data)
 
     switch (  ((*equation_data).roots).num_roots) {
         case -1:
-            printf("Уравнение имеет бесконечно много корней\n");
+            printf(BOLD RED "Уравнение имеет бесконечно много корней\n" RESET);
             break;
         case 0:
-            printf("Уравнение не имеет корней\n");
+            printf(BOLD RED "Уравнение не имеет корней\n" RESET);
             break;
         case 1:
-            printf("Уравнение имеет один корень:\n");
+            printf("Уравнение имеет один корень:\n" RESET);
             printf("x = %.20f\n", (*equation_data).roots.x1);
             break;
         case 2:
-            printf("Уравнение имеет два корня:\n");
+            printf("Уравнение имеет два корня:\n" RESET);
             printf("x1 = %.20f\n", (*equation_data).roots.x1);
             printf("x2 = %.20f\n", (*equation_data).roots.x2);
             break;
