@@ -68,7 +68,7 @@ Equation_data input(Equation_data *equation_data)
     (*equation_data).coefficents.a = a;
     (*equation_data).coefficents.b = b;
     (*equation_data).coefficents.c = c;
-
+ 
     printf(BOLD "\nВы ввели:\n" RESET);
     printf("Первый коэфицент a: %.6f\n", (*equation_data).coefficents.a);
     printf("Второй коэфицент b: %.6f\n", (*equation_data).coefficents.b);

@@ -6,10 +6,45 @@
 
 //----------------------------------------
 //@param [in] const char *file_name - имя файла
+//@param [in] int *line_number номер строки
+//@param [in] double *result_array - строка в виде массива
+//@param [out] int parsed_count - проверка на количество считанных элементов
+//----------------------------------------
+ 
+int scan_one_test(const char *filename, int *line_number, double *result_array) {
+    FILE *file = fopen(filename, "r");
+    if (file == NULL) {
+        return -1; 
+    }
+    
+    char line[1024];
+    int current_line = 1;
+    
+    while (fgets(line, sizeof(line), file) != NULL) {
+        if (current_line == *line_number) {
+            fclose(file);
+            
+            int parsed_count = sscanf(line, "%lf %lf %lf %lf %lf %lf",
+                                    &result_array[0], &result_array[1], &result_array[2],
+                                    &result_array[3], &result_array[4], &result_array[5]);
+            
+            return parsed_count; 
+        }
+        current_line++;
+    }
+    
+    fclose(file);
+    return -2; 
+}
+
+
+//----------------------------------------
+//@param [in] const char *file_name - имя файла
 //@param [out] int line_count - количество не пустых строк файла
 //----------------------------------------
 
-int count_lines_in_file(const char *file_name) {
+int count_lines_in_file(const char *file_name)
+{
 
     FILE *file = fopen(file_name, "r");
     if (file == NULL) {
@@ -46,14 +81,8 @@ int count_lines_in_file(const char *file_name) {
 //@param [out] 1, если тестовый файл верно записан, иначе 0
 //----------------------------------------
 
-int read_array_from_file(const char *file_name, double test_data[AMOUNT_OF_TESTS][6], int *line_count) {
+int read_tests_from_file(const char *file_name, double test_data[AMOUNT_OF_TESTS][6], int *line_count) {
     FILE *file = fopen(file_name, "r");
-    
-
-    if (file == NULL) {
-        printf("Ошибка открытия файла \n");
-        return 0; 
-    }
     
     for (int i = 0; i < *line_count; i++) {
         for (int j = 0; j < 6; j++) {
@@ -71,30 +100,26 @@ int read_array_from_file(const char *file_name, double test_data[AMOUNT_OF_TESTS
 
 
 //----------------------------------------
-//@param [in] double a  коэффицент а
-//@param [in] double b  коэффицент b
-//@param [in] double c  коэффицент c
-//@param [in] double x1_specified  тестовый корень 1
-//@param [in] double x2_specified  тестовый корень 2
-//@param [in] int number_of_solutions  количество тестовых корней
+//@param [in] int *number_of_line - количество не пустых строк в файле
+//@param [in] const char *file_name - имя файла с тестами
 //@param [out] 1, если тестовые корни совпадают с настоящим, иначе 0
 //----------------------------------------
 
-int run_one_test(int *number_of_line, double test_data[AMOUNT_OF_TESTS][6])
+int run_one_test(double one_test_data[6])
 {
     Equation_data equation_data;
 
-    equation_data.coefficents.a = test_data[*number_of_line][0];
-    equation_data.coefficents.b = test_data[*number_of_line][1];
-    equation_data.coefficents.c = test_data[*number_of_line][2];
+    equation_data.coefficents.a = one_test_data[0];
+    equation_data.coefficents.b = one_test_data[1];
+    equation_data.coefficents.c = one_test_data[2];
 
     equation_data = solve_quadratic_equation(equation_data);
 
-    if ( ((is_zero(equation_data.roots.x1, test_data[*number_of_line][3])==0) &&
-        (is_zero(equation_data.roots.x2, test_data[*number_of_line][4])==0) &&
-        (test_data[*number_of_line][5] == equation_data.roots.num_roots)) || ((is_zero(equation_data.roots.x2, test_data[*number_of_line][3])==0) &&
-        (is_zero(equation_data.roots.x1, test_data[*number_of_line][4])==0) &&
-        (test_data[*number_of_line][5] == equation_data.roots.num_roots)) ) {
+    if ( ((is_zero(equation_data.roots.x1, one_test_data[3])==0) &&
+        (is_zero(equation_data.roots.x2, one_test_data[4])==0) &&
+        (one_test_data[5] == equation_data.roots.num_roots)) || ((is_zero(equation_data.roots.x2, one_test_data[3])==0) &&
+        (is_zero(equation_data.roots.x1, one_test_data[4])==0) &&
+        (one_test_data[5] == equation_data.roots.num_roots)) ) {
         return 1;
     }
     else {
@@ -117,12 +142,15 @@ int run_test()
     printf("Количество тестовых примеров %d\n", lines_quantity);
 
     double test_data[AMOUNT_OF_TESTS][6];
-    read_array_from_file(file_name, test_data, &lines_quantity);
+    //read_tests_from_file(file_name, test_data, &lines_quantity);
+
+    double one_test_data[6];
 
     int not_failed = 0;
-    for (int i = 0; i < lines_quantity; i++)
+    for (int i = 1; i < lines_quantity+1; i++)
     {
-        not_failed += run_one_test(&i, test_data);
+        scan_one_test(file_name, &i, one_test_data);
+        not_failed += run_one_test(one_test_data);
     }
 
     return not_failed;
