@@ -19,7 +19,7 @@ int read_array_from_file(const char *file_name, double test_data[AMOUNT_OF_TESTS
                 fclose(file);
                 return 0; 
             }
-        }
+        }   
     }
     
     fclose(file);
@@ -64,6 +64,7 @@ int run_one_test(double *a, double *b, double *c, double *x1_specified, double *
 
 int run_test()
 {
+
     const char *file_name = "tests.txt";
     double test_data[AMOUNT_OF_TESTS][6];
     read_array_from_file(file_name, test_data);
@@ -77,7 +78,7 @@ int run_test()
 
     return not_failed;
 }
-
+  
 
 //----------------------------------------
 //[out] количество верно пройденных тестов
