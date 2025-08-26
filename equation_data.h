@@ -67,7 +67,7 @@ typedef struct
 } Equation_data;
 
 
-int check_epsilon_neighborhood(double number, double program_number);
+int is_zero(double number, double program_number);
 void print_equation(Equation_data *equation_data);
 Equation_data input(Equation_data *equation_data);
 double calc_discriminant(Equation_data *equation_data);

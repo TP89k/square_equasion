@@ -2,14 +2,14 @@
 #include <stdio.h>
 #include <math.h>
 
-  
+
 //----------------------------------------
 //@param [in] double number число, для которого проверяется эпсилон окрестность
 //@param [in] double program_number число, вокруг которого проверяется эпсилон окрестность
 //[out] int число (1 - если True и 0 - если False)
 //----------------------------------------
 
-int check_epsilon_neighborhood(double number, double program_number)
+int is_zero(double number, double program_number)
 {
     if (!((number < program_number + EPSILON) && (number > program_number - EPSILON)))
     {
@@ -69,7 +69,7 @@ Equation_data input(Equation_data *equation_data)
     (*equation_data).coefficents.b = b;
     (*equation_data).coefficents.c = c;
 
-    printf(BOLD "\nВы ввели:\n");
+    printf(BOLD "\nВы ввели:\n" RESET);
     printf("Первый коэфицент a: %.6f\n", (*equation_data).coefficents.a);
     printf("Второй коэфицент b: %.6f\n", (*equation_data).coefficents.b);
     printf("Третий коэфицент c: %.6f\n", (*equation_data).coefficents.c);
@@ -98,14 +98,14 @@ Equation_data solve_quadratic_equation(Equation_data equation_data)
 {
     double discriminant = calc_discriminant(&equation_data);
 
-    if (check_epsilon_neighborhood(equation_data.coefficents.a, 0)==1)
+    if (is_zero(equation_data.coefficents.a, 0)==1)
     {
         if (discriminant > 0+EPSILON) {
             equation_data.roots.num_roots = 2;
             equation_data.roots.x1 = (-equation_data.coefficents.b + sqrt(discriminant)) / (2 * equation_data.coefficents.a);
             equation_data.roots.x2 = (-equation_data.coefficents.b - sqrt(discriminant)) / (2 * equation_data.coefficents.a);
         }
-        else if (check_epsilon_neighborhood(discriminant, 0)==0) {
+        else if (is_zero(discriminant, 0)==0) {
             equation_data.roots.num_roots = 1;
             equation_data.roots.x1 = equation_data.roots.x2 = -equation_data.coefficents.b / (2 * equation_data.coefficents.a);
         }
@@ -114,10 +114,10 @@ Equation_data solve_quadratic_equation(Equation_data equation_data)
             equation_data.roots.x1 = equation_data.roots.x2 = 0;
         }
     }
-    else if (check_epsilon_neighborhood(equation_data.coefficents.a, 0)==0)
+    else if (is_zero(equation_data.coefficents.a, 0)==0)
     {
-        if (check_epsilon_neighborhood(equation_data.coefficents.b, 0)==0) {
-            if (check_epsilon_neighborhood(equation_data.coefficents.c, 0)==0) {
+        if (is_zero(equation_data.coefficents.b, 0)==0) {
+            if (is_zero(equation_data.coefficents.c, 0)==0) {
                 equation_data.roots.num_roots = -1;
                 equation_data.roots.x1 = equation_data.roots.x2 = 0;
             }
@@ -145,7 +145,7 @@ Equation_data solve_quadratic_equation(Equation_data equation_data)
 
 void print_results(Equation_data *equation_data)
 {
-    printf("\n==== РЕЗУЛЬТАТЫ ====\n");
+    printf(BOLD "\n==== РЕЗУЛЬТАТЫ ====\n" RESET);
 
     switch (  ((*equation_data).roots).num_roots) {
         case -1:
