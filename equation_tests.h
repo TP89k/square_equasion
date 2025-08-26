@@ -9,7 +9,7 @@
 //const int AMOUNT_OF_TESTS - размер массива тестовых примеров
 //----------------------------------------
 
-const int AMOUNT_OF_TESTS = 6;  
+const int AMOUNT_OF_TESTS = 10;  
 
 
 int read_array_from_file(const char *file_name, double test_data[AMOUNT_OF_TESTS][6]);

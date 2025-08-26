@@ -4,6 +4,11 @@
 #include <stdlib.h>
 
 
+//----------------------------------------
+//@param [in] const char *file_name - имя файла
+//@param [in] double test_data[AMOUNT_OF_TESTS][6] - массив тестовых примеров
+//@param [out] 1, если тестовый файл верно записан, иначе 0
+//----------------------------------------
 
 int read_array_from_file(const char *file_name, double test_data[AMOUNT_OF_TESTS][6]) {
     FILE *file = fopen(file_name, "r");

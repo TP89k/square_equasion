@@ -2,7 +2,7 @@
 #include <math.h>
 
 #include "equation_data.h"
-#include "equation_tests.h"
+#include "equation_tests.h"  
 
 
 int main() {

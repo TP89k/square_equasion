@@ -19,6 +19,7 @@ const float EPSILON = 0.00001;
 // double b - второй коэффицент при х
 // double c - третий коэффицент 
 //----------------------------------------
+
 typedef struct
 {
     double a;

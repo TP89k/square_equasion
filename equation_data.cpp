@@ -70,9 +70,9 @@ Equation_data input(Equation_data *equation_data)
     (*equation_data).coefficents.c = c;
 
     printf("\nВы ввели:\n");
-    printf("Первый коэфицент a: %.4f\n", (*equation_data).coefficents.a);
-    printf("Второй коэфицент b: %.4f\n", (*equation_data).coefficents.b);
-    printf("Третий коэфицент c: %.4f\n", (*equation_data).coefficents.c);
+    printf("Первый коэфицент a: %.6f\n", (*equation_data).coefficents.a);
+    printf("Второй коэфицент b: %.6f\n", (*equation_data).coefficents.b);
+    printf("Третий коэфицент c: %.6f\n", (*equation_data).coefficents.c);
 
     return *equation_data;
  }
