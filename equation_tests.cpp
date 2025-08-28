@@ -7,12 +7,12 @@
 
 void input_tests() 
 {
-    FILE *file;
+    FILE *file_tests;
     const char *file_name = "tests.txt";
 
     char text[1000];
 
-    printf("Введите строку: ");
+    printf("Введите новый тест (при отсутсвии нового тестового примера нажмите ENTER): ");
     fgets(text, sizeof(text), stdin);
 
     for(int i = 0; text[i] != '\0'; i++) {
@@ -22,15 +22,15 @@ void input_tests()
         }
     }
 
-    file = fopen(file_name, "a");
-    if (file == NULL) {
+    file_tests = fopen(file_name, "a");
+    if (file_tests == NULL) {
         printf("Ошибка открытия файла '%s' для добавления!\n", file_name);
         return;
     }
 
-    fprintf(file, "%s\n", text);
+    fprintf(file_tests, "%s\n", text);
 
-    fclose(file);
+    fclose(file_tests);
 
     printf("Записать новые тесты? Y/N\n");
     int p = getchar();
@@ -52,17 +52,17 @@ void input_tests()
 
 int scan_one_test(const char *filename, int *line_number, double *result_array) 
 {
-    FILE *file = fopen(filename, "r");
-    if (file == NULL) {
+    FILE *file_tests = fopen(filename, "r");
+    if (file_tests == NULL) {
         return -1; 
     }
     
     char line[1000];
     int current_line = 1;
     
-    while (fgets(line, sizeof(line), file) != NULL) {
+    while (fgets(line, sizeof(line), file_tests) != NULL) {
         if (current_line == *line_number) {
-            fclose(file);
+            fclose(file_tests);
             
             int parsed_count = sscanf(line, "%lf %lf %lf %lf %lf %lf",
                                     &result_array[0], &result_array[1], &result_array[2],
@@ -73,7 +73,7 @@ int scan_one_test(const char *filename, int *line_number, double *result_array)
         current_line++;
     }
     
-    fclose(file);
+    fclose(file_tests);
     return -1; 
 }
 
@@ -155,7 +155,6 @@ int run_one_test(double one_test_data[6])
 int run_test()
 {
     const char *file_name = "tests.txt";
-    FILE *file = fopen(file_name, "r");
 
     int lines_quantity = count_lines_in_file(file_name);
 

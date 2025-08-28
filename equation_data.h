@@ -19,7 +19,7 @@ const int LANGUAGE = 0;
 //const double EPSILON - константа эпсилон окрестности вычислений
 //----------------------------------------
 
-const double EPSILON = 0.00001;
+const double EPSILON = 1e-8;
  
 
 //----------------------------------------
