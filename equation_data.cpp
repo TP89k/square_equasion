@@ -94,8 +94,10 @@ double calc_discriminant(Equation_data *equation_data)
 //@param [out] Equation_data - структура коэффицентов и корней уравнения + количество корней
 //----------------------------------------
 
-Equation_data solve_quadratic_equation(Equation_data equation_data)
+Equation_data solve_quadratic_equation()
 {
+    Equation_data equation_data;
+
     double discriminant = calc_discriminant(&equation_data);
 
     if (is_zero(equation_data.coefficents.a, 0)==1)

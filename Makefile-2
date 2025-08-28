@@ -1,0 +1,16 @@
+all: square_equation_solver
+
+square_equation_solver: main.o equation_tests.o equation_data.o
+	g++ main.o equation_tests.o equation_data.o -o square_equation_solver
+
+main.o: main.cpp
+	g++ -c main.cpp
+
+equation_tests.o: equation_tests.cpp
+	g++ -c equation_tests.cpp
+
+equation_data.o: equation_data.cpp
+	g++ -c equation_data.cpp
+
+clean:
+	rm -rf *.o square_equation_solver

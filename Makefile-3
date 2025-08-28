@@ -1,0 +1,19 @@
+CC=g++
+CFLAGS=-c -Wall
+
+all: square_equation_solver
+
+square_equation_solver: main.o equation_tests.o equation_data.o
+	$(CC) main.o equation_tests.o equation_data.o -o square_equation_solver
+
+main.o: main.cpp
+	$(CC) $(CFLAGS) main.cpp
+
+equation_tests.o: equation_tests.cpp
+	$(CC) $(CFLAGS) equation_tests.cpp
+
+hello.o: equation_data.cpp
+	$(CC) $(CFLAGS) equation_data.cpp
+
+clean:
+	rm -rf *.o square_equation_solver

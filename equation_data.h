@@ -71,7 +71,7 @@ int is_zero(double number, double program_number);
 void print_equation(Equation_data *equation_data);
 Equation_data input(Equation_data *equation_data);
 double calc_discriminant(Equation_data *equation_data);
-Equation_data solve_quadratic_equation(Equation_data equation_data);
+Equation_data solve_quadratic_equation();
 void print_results(Equation_data *equation_data);
    
 #endif
