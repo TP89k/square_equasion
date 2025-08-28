@@ -2,6 +2,13 @@
 
 
 //----------------------------------------
+//const int FILE_NAME - константа имени тестового файла
+//----------------------------------------
+
+const char *FILE_NAME = "tests.txt";
+
+
+//----------------------------------------
 //@param [out] вывод нового вида файла
 //----------------------------------------
 
@@ -29,17 +36,10 @@ void input_tests()
     }
 
     fprintf(file_tests, "%s\n", text);
+    printf("Запись тестов завершена\n");
 
     fclose(file_tests);
 
-    printf("Записать новые тесты? Y/N\n");
-    int p = getchar();
-    if ((p=='Y') || (p=='y')){
-        input_tests();
-    }
-    else {
-        printf("Запись тестов завершена\n");
-    }
 }
 
 
@@ -50,9 +50,9 @@ void input_tests()
 //@param [out] тестовое значение -1 в случае ошибки
 //----------------------------------------
 
-int scan_one_test(const char *filename, int *line_number, double *result_array) 
+int scan_one_test(int *line_number, double *result_array) 
 {
-    FILE *file_tests = fopen(filename, "r");
+    FILE *file_tests = fopen(FILE_NAME, "r");
     if (file_tests == NULL) {
         return -1; 
     }
@@ -83,9 +83,9 @@ int scan_one_test(const char *filename, int *line_number, double *result_array)
 //@param [out] int line_count - количество не пустых строк файла
 //----------------------------------------
 
-int count_lines_in_file(const char *file_name)
+int count_lines_in_file()
 {
-    FILE *file = fopen(file_name, "r");
+    FILE *file = fopen(FILE_NAME, "r");
     if (file == NULL) {
         return -1;
     }
@@ -152,20 +152,17 @@ int run_one_test(double one_test_data[6])
 //@param [out] int not_failed количество верно пройденных тестов
 //----------------------------------------
 
-int run_test()
+int run_test(int *lines_in_file)
 {
-    const char *file_name = "tests.txt";
 
-    int lines_quantity = count_lines_in_file(file_name);
-
-    printf("Количество тестовых примеров %d\n", lines_quantity);
+    printf("Количество тестовых примеров %d\n", *lines_in_file);
 
     double one_test_data[6];
 
     int not_failed = 0;
-    for (int i = 1; i < lines_quantity+1; i++)
+    for (int i = 1; i < *lines_in_file+1; i++)
     {
-        scan_one_test(file_name, &i, one_test_data);
+        scan_one_test(&i, one_test_data);
         not_failed += run_one_test(one_test_data);
     }
 
@@ -179,12 +176,12 @@ int run_test()
 
 void testing_program()
 {
-    const char *file_name = "tests.txt";
+    int lines_in_file = count_lines_in_file();
     
-    int count_tests = run_test();
+    int count_tests = run_test(&lines_in_file);
 
     printf("ПРОЙДЕНО ТЕСТОВ: %d", count_tests);
-    printf(" ИЗ %d\n", count_lines_in_file(file_name));
+    printf(" ИЗ %d\n", lines_in_file);
 
     input_tests();
 } 
