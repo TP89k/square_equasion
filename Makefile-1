@@ -1,3 +1,0 @@
-all:
-	g++ main.cpp equation_tests.cpp equation_data.cpp -o square_equation_solver
-

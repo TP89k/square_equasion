@@ -12,7 +12,7 @@ int main() {
 
     equation_data = input(&equation_data);
     print_equation(&equation_data); 
-    equation_data = solve_quadratic_equation();
+    equation_data = solve_quadratic_equation(&equation_data);
     print_results(&equation_data);
     
     printf("Программа завершена \n");

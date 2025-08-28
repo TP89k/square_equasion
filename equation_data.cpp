@@ -1,6 +1,4 @@
 #include "equation_data.h"
-#include <stdio.h>
-#include <math.h>
 
 
 //----------------------------------------
@@ -94,48 +92,47 @@ double calc_discriminant(Equation_data *equation_data)
 //@param [out] Equation_data - структура коэффицентов и корней уравнения + количество корней
 //----------------------------------------
 
-Equation_data solve_quadratic_equation()
+Equation_data solve_quadratic_equation(Equation_data *equation_data)
 {
-    Equation_data equation_data;
 
-    double discriminant = calc_discriminant(&equation_data);
+    double discriminant = calc_discriminant(equation_data);
 
-    if (is_zero(equation_data.coefficents.a, 0)==1)
+    if (is_zero((*equation_data).coefficents.a, 0)==1)
     {
         if (discriminant > 0+EPSILON) {
-            equation_data.roots.num_roots = 2;
-            equation_data.roots.x1 = (-equation_data.coefficents.b + sqrt(discriminant)) / (2 * equation_data.coefficents.a);
-            equation_data.roots.x2 = (-equation_data.coefficents.b - sqrt(discriminant)) / (2 * equation_data.coefficents.a);
+            (*equation_data).roots.num_roots = 2;
+            (*equation_data).roots.x1 = (-(*equation_data).coefficents.b + sqrt(discriminant)) / (2 * (*equation_data).coefficents.a);
+            (*equation_data).roots.x2 = (-(*equation_data).coefficents.b - sqrt(discriminant)) / (2 * (*equation_data).coefficents.a);
         }
         else if (is_zero(discriminant, 0)==0) {
-            equation_data.roots.num_roots = 1;
-            equation_data.roots.x1 = equation_data.roots.x2 = -equation_data.coefficents.b / (2 * equation_data.coefficents.a);
+            (*equation_data).roots.num_roots = 1;
+            (*equation_data).roots.x1 = (*equation_data).roots.x2 = -(*equation_data).coefficents.b / (2 * (*equation_data).coefficents.a);
         }
         else {
-            equation_data.roots.num_roots = 0;
-            equation_data.roots.x1 = equation_data.roots.x2 = 0;
+            (*equation_data).roots.num_roots = 0;
+            (*equation_data).roots.x1 = (*equation_data).roots.x2 = 0;
         }
     }
-    else if (is_zero(equation_data.coefficents.a, 0)==0)
+    else if (is_zero((*equation_data).coefficents.a, 0)==0)
     {
-        if (is_zero(equation_data.coefficents.b, 0)==0) {
-            if (is_zero(equation_data.coefficents.c, 0)==0) {
-                equation_data.roots.num_roots = -1;
-                equation_data.roots.x1 = equation_data.roots.x2 = 0;
+        if (is_zero((*equation_data).coefficents.b, 0)==0) {
+            if (is_zero((*equation_data).coefficents.c, 0)==0) {
+                (*equation_data).roots.num_roots = -1;
+                (*equation_data).roots.x1 = (*equation_data).roots.x2 = 0;
             }
             else {
-                equation_data.roots.num_roots = 0;
-                equation_data.roots.x1 = equation_data.roots.x2 = 0;
+                (*equation_data).roots.num_roots = 0;
+                (*equation_data).roots.x1 = (*equation_data).roots.x2 = 0;
             }
         }
         else {
-            equation_data.roots.num_roots = 1;
-            equation_data.roots.x1 = -equation_data.coefficents.c / equation_data.coefficents.b;
-            equation_data.roots.x2 = equation_data.roots.x1;
+            (*equation_data).roots.num_roots = 1;
+            (*equation_data).roots.x1 = -(*equation_data).coefficents.c / (*equation_data).coefficents.b;
+            (*equation_data).roots.x2 = (*equation_data).roots.x1;
         }
     }
 
-    return equation_data;
+    return *equation_data;
 }
 
 

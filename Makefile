@@ -13,4 +13,4 @@ equation_data.o: equation_data.cpp
 	g++ -c equation_data.cpp
 
 clean:
-	rm -rf *.o square_equation_solver
+	rm -rf *.o square_equation_solver 

@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
+#include <math.h>
 
 
 //----------------------------------------
@@ -20,7 +21,7 @@ void input_tests();
 int scan_one_test(const char *filename, int *line_number, double *result_array);
 int count_lines_in_file(const char *file_name);
 int read_tests_from_file(const char *file_name, double test_data[AMOUNT_OF_TESTS][6]);
-int run_one_test(double *one_test_data);
+int run_one_test(double one_test_data[6]);
 int run_test();
 void testing_program();  
 
