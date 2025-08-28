@@ -8,7 +8,9 @@
 int main() {
     Equation_data equation_data;
 
-    testing_program();
+    #ifdef _DEBUG
+        testing_program();
+    #endif
 
     equation_data = input(&equation_data);
     print_equation(&equation_data); 

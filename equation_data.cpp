@@ -162,5 +162,7 @@ void print_results(Equation_data *equation_data)
             printf("x1 = %.20f\n", (*equation_data).roots.x1);
             printf("x2 = %.20f\n", (*equation_data).roots.x2);
             break;
+        default:
+            printf(BOLD RED "Неизвестный входной параметр\n" RESET);
     }
 }

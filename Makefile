@@ -1,16 +1,33 @@
-all: square_equation_solver
+BUILD = release
+PROGECT_NAME = square_equation_solver.exe
 
-square_equation_solver: main.o equation_tests.o equation_data.o
-	g++ main.o equation_tests.o equation_data.o -o square_equation_solver
+CC=g++
+CFLAGS = -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-equal -Winline -Wunreachable-code \
+-Wmissing-declarations -Wmissing-include-dirs -Wswitch-enum -Wswitch-default -Weffc++ -Wmain -Wextra -Wall -g -pipe \
+-fexceptions -Wcast-qual -Wconversion -Wctor-dtor-privacy -Wempty-body -Wformat-security -Wformat=2 \
+-Wignored-qualifiers -Wlogical-op -Wno-missing-field-initializers -Wnon-virtual-dtor -Woverloaded-virtual \
+-Wpointer-arith -Wsign-promo -Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel -Wtype-limits \
+-Wwrite-strings -Werror=vla -D_EJUDGE_CLIENT_SIDE 
 
-main.o: main.cpp
-	g++ -c main.cpp
+ifeq ($(BUILD),debug)
+	CFLAGS += -D_DEBUG
+endif
 
-equation_tests.o: equation_tests.cpp
-	g++ -c equation_tests.cpp
+SOURCES = main.cpp equation_data.cpp equation_tests.cpp equation_data.h equation_tests.h
+OBJECTS = $(SOURCES:.c=.o)
+TARGET = square_equation_solver.exe
 
-equation_data.o: equation_data.cpp
-	g++ -c equation_data.cpp
+$(TARGET): $(OBJECTS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS)
+
+release:
+	$(MAKE) BUILD=release
+
+debug:
+	$(MAKE) BUILD=debug
 
 clean:
-	rm -rf *.o square_equation_solver 
+	rm *.o *.exe 2>nul || exit 0
+
+.PHONY: clean
+
